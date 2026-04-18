@@ -1,8 +1,11 @@
 import os
+from dotenv import load_dotenv
 import json
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from openai import OpenAI, APIError, APIConnectionError, AuthenticationError
+
+load_dotenv()
 
 SUPPORTED_AIS = {
     "deepseek": {
