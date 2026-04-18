@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - /home/ubuntu/software_test/Assignment1/data/uploads:/app/uploads
+      - /home/ubuntu/software_test/Assignment1/data/prompts:/app/prompts
+
+  frontend:
+    build:
+      context: ./frontend/test_generator
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80" # host:container
+    depends_on:
+      - backend
+    restart: unless-stopped
